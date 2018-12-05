@@ -1,0 +1,59 @@
+.device {
+    display: table;
+    margin: 10% auto 10px;
+    width: 35%;
+}
+
+.device-switch-card {
+
+    transition: border 0.1s ease;
+    box-shadow: none;
+    border-radius: 12px;
+    margin: 10px 16px;
+
+    .device-switch {
+        width: 100%;
+        padding-bottom: 15px;
+    }
+
+    ion-label {
+        flex: 0 0 60px;
+        width: 60px;
+        min-width: 60px;
+        margin-top: 22px;
+    }
+
+    ion-range {
+        padding-top: 24px;
+    }
+}
+
+
+h4 {
+    width: 100%;
+    text-align: center;
+    color: #ccc;
+    font-weight: 400
+}
+
+.sensor-div {
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+
+    .sensors-view {}
+}
+
+.sensor-card {
+    box-shadow: none;
+    border-radius: 12px;
+    margin: 10px 16px;
+    border: 1px solid #ddd;
+    float: left;
+    width: 160px;
+    padding: 12px 8px 8px 12px;
+    ion-button {
+        display: table;
+        margin: 0 auto;
+    }
+}

@@ -1,0 +1,71 @@
+<ion-content>
+  <div class="home-header">
+    <h1>Lâm's Home</h1>
+    <img src="assets/img/naoki.jpg" alt="" href="/setting" routerDirection="forward">
+    <ion-button fill="clear" href="/notification" routerDirection="forward">
+      <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-item lines="none">
+    <ion-label>
+      Devices
+    </ion-label>
+    <ion-select value="all">
+      <ion-select-option value="all">All</ion-select-option>
+      <ion-select-option value="livingroom">Living-room</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div class="device-list">
+    <ion-card *ngFor="let device of userDevices">
+      <ion-item button [href]="'/device/'+device.deviceId" routerDirection="forward" lines="none">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-label>
+          <ion-text>
+            <ion-card-title>
+              {{device.name}}
+            </ion-card-title>
+          </ion-text>
+          <p>{{device.location}}</p>
+        </ion-label>
+      </ion-item>
+      <div *ngIf="device.type=='controller'">
+        <ion-item *ngFor="let switch of getSwitches(device.latestData.data); index as i" lines="none">
+          <ion-label style="text-transform: capitalize;" position="fixed">{{switch}}</ion-label>
+          <ion-toggle [checked]="(device.latestData.data[switch] =='0')? false:true" *ngIf="switch =='door'" slot="end"
+            (ionChange)="switchChange(device.deviceId,switch,$event)"></ion-toggle>
+          <ion-range min="0" max="3" step="1" snaps="true" color="primary" pin="true" *ngIf="switch !='door'" slot="end"
+            [value]="getPower(device.latestData.data[switch])" (ionChange)="switchChange(device.deviceId,switch,$event)"></ion-range>
+        </ion-item>
+      </div>
+      <ion-item lines="none" *ngIf="device.type=='sensor'">
+        <ion-label slot="start">
+          Temperature
+        </ion-label>
+        <ion-chip color="primary" outline="true" slot="end">
+          <ion-label>{{device.latestData.data.temp}}&deg;C</ion-label>
+        </ion-chip>
+      </ion-item>
+      <ion-item lines="none" *ngIf="device.type=='sensor'">
+        <ion-label slot="start">
+          Humidity
+        </ion-label>
+        <ion-chip color="primary" outline="true" slot="end">
+          <ion-label>{{device.latestData.data.humid}}%</ion-label>
+        </ion-chip>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>
+          <p style="color:#ccc">{{device.updatedAt}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+
+    <ion-button expand="block" fill="clear" class="device-add-btn" href="/add-device" routerDirection="forward"
+      disabled="true" color="dark">
+      <ion-icon slot="start" name="add-circle"></ion-icon>
+      <ion-label>Add device</ion-label>
+    </ion-button>
+  </div>
+
+</ion-content>

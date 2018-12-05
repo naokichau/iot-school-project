@@ -1,0 +1,117 @@
+<ion-toolbar color="light">
+  <ion-buttons slot="start">
+    <ion-button href="/home" routerDirection="backward">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>{{deviceData.name}}</ion-title>
+  <ion-buttons slot="end">
+    <ion-button (click)="presentDeviceDetail()">
+      <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content fullscreen="true">
+  <!-- <ion-slides pager="true" [options]="slideOpts" style="padding-bottom: 30px;" *ngIf="deviceData.type!= 'sensor'">
+    <ion-slide *ngFor="let switch of getSwitches(deviceData.latestData.data); index as i">
+      <ion-card [hidden]="switch != 'light'" [ngStyle]="{'border': (deviceData.latestData.data[switch] !='0')? '3px solid rgb(253,207,20)':'1px solid #ddd'}"
+        class="device-switch-card">
+        <ion-item button lines="none" (click)="switchDevice(switch)">
+          <ion-ripple-effect></ion-ripple-effect>
+          <div class="device-switch">
+            <img [src]="(deviceData.latestData.data[switch] !='0')?'assets/icon/lightbulbon.png':'assets/icon/lightbulboff.png'"
+              class="device">
+            <h4>touch to turn {{(deviceData.latestData.data[switch] !='0')?'off':'on'}}</h4>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label position="fixed">Power</ion-label>
+          <ion-range min="1" max="3" step="1" snaps="true" color="warning" pin="true" [disabled]="(deviceData.latestData.data[switch] =='0')"></ion-range>
+        </ion-item>
+      </ion-card>
+      <ion-card [hidden]="switch != 'fan'" [ngStyle]="{'border': (deviceData.latestData.data[switch] !='0')? '3px solid #3880ff':'1px solid #ddd'}"
+        class="device-switch-card">
+        <ion-item button lines="none" (click)="switchDevice(switch)">
+          <ion-ripple-effect></ion-ripple-effect>
+          <div class="device-switch">
+            <img [src]="(deviceData.latestData.data[switch] !='0')?'assets/icon/windon.png':'assets/icon/windoff.png'"
+              class="device">
+            <h4>touch to turn {{(deviceData.latestData.data[switch] !='0')?'off':'on'}}</h4>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label position="fixed">Power</ion-label>
+          <ion-range min="1" max="3" step="1" snaps="true" color="primary" pin="true" [disabled]="!deviceSwitch"></ion-range>
+        </ion-item>
+      </ion-card>
+
+      <ion-card [hidden]="switch != 'door'" [ngStyle]="{'border': (deviceData.latestData.data[switch] !='0')? '3px solid #f04141':'1px solid #ddd'}"
+        class="device-switch-card">
+        <ion-item button lines="none" (click)="switchDevice(switch)">
+          <ion-ripple-effect></ion-ripple-effect>
+          <div class="device-switch">
+            <img [src]="(deviceData.latestData.data[switch] !='0')?'assets/icon/lock.png':'assets/icon/unlock.png'"
+              class="device">
+            <h4>touch to turn {{(deviceData.latestData.data[switch] !='0')?'unlock':'lock'}}</h4>
+          </div>
+        </ion-item>
+      </ion-card>
+    </ion-slide>
+  </ion-slides> -->
+  <!--  -->
+
+  <!-- <div class="sensor-div" [hidden]="DeviceType != 'Sensor'">
+    <div class="sensors-view">
+      <ion-card class="sensor-card">
+        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+        <ion-card-title>Card Title</ion-card-title>
+        <ion-chip color="primary" outline="true">
+          <ion-icon name="stats"></ion-icon>
+          <ion-label>record</ion-label>
+        </ion-chip>
+      </ion-card>
+    </div>
+  </div> -->
+  <ion-list lines="none">
+    <ion-item button [href]="'data-record/' +deviceData.deviceId" routerDirection="forward">
+      <ion-icon name="stats" slot="start" color="primary"></ion-icon>
+      <ion-label color="primary">
+        View record
+      </ion-label>
+    </ion-item>
+    <ion-list-header>
+      <ion-label style="font-size:14px;font-weight: bold">EDITABLE INFO</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label position="fixed">Name</ion-label>
+      <ion-input [value]="deviceData.name" slot="end" style="text-align: right;"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Room</ion-label>
+      <ion-select [(ngModel)]="deviceData.location" [interfaceOptions]="roomActionSheet" interface="action-sheet"
+        placeholder="Select One" (ionChange)="changeRoom($event)" slot="end">
+        <ion-select-option value="living-room">Living-room</ion-select-option>
+        <ion-select-option value="add">Add room</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-list-header>
+      <ion-label style="font-size:14px;font-weight: bold">DANGER ZONE</ion-label>
+    </ion-list-header>
+    <ion-item button>
+      <ion-label color="danger">
+        Factory reset
+      </ion-label>
+    </ion-item>
+    <ion-item button>
+      <ion-label color="danger">
+        Remove device
+      </ion-label>
+    </ion-item>
+    <!-- <ion-item button>
+      <ion-label color="primary">
+        About
+      </ion-label>
+    </ion-item> -->
+  </ion-list>
+</ion-content>

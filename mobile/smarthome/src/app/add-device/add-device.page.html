@@ -1,0 +1,18 @@
+<ion-toolbar color="light">
+  <ion-buttons slot="start">
+    <ion-button href="/home" routerDirection="backward">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>Add device</ion-title>
+  <ion-buttons slot="end">
+    <ion-button color="primary" (click)="scan()">
+      <ion-spinner color="primary" [hidden]="!isScanning" slot="start"></ion-spinner>
+      {{(isScanning)? 'stop': 'scan'}}
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content>
+
+</ion-content>
